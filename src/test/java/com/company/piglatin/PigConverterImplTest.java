@@ -75,6 +75,7 @@ public class PigConverterImplTest {
         Assert.assertEquals("ellohay.", converter.convert("hello."));
         Assert.assertEquals("ElLohay.", converter.convert("HeLlo."));
         Assert.assertEquals("ElLoh'ay.", converter.convert("HeL'lo."));
+        Assert.assertEquals("Hay.", converter.convert("H."));
     }
 
     @Test
@@ -82,6 +83,8 @@ public class PigConverterImplTest {
         Assert.assertEquals("ElLoh'ay.-Ahojw'ay.", converter.convert("HeL'lo.-Ah'oj."));
         Assert.assertEquals("away-away-away", converter.convert("a-a-a-"));
         Assert.assertEquals("away", converter.convert("a"));
+        Assert.assertEquals("", converter.convert(""));
+        Assert.assertEquals(".", converter.convert("."));
     }
 
     @Test

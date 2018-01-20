@@ -75,6 +75,10 @@ public class PigConverterImpl implements PigConverter {
      * @return converted words
      */
     private String convertWord(final String inputWord) {
+        if (inputWord.length() == 0) {
+            return inputWord;
+        }
+
         if (inputWord.endsWith(STATIC_SUFFIX)) {
             return inputWord;
         }
@@ -85,11 +89,13 @@ public class PigConverterImpl implements PigConverter {
         String loweredWord = inputWord.toLowerCase();
         loweredWord = removePunctuations(loweredWord);
 
-        Character firstLetter = loweredWord.charAt(0);
-        if (VOWELS.contains(firstLetter)) {
-            loweredWord = transformVowelWord(loweredWord);
-        } else if (CONSONANTS.contains(firstLetter)) {
-            loweredWord = transformConsonantWord(loweredWord);
+        if (loweredWord.length() > 0) {
+            Character firstLetter = loweredWord.charAt(0);
+            if (VOWELS.contains(firstLetter)) {
+                loweredWord = transformVowelWord(loweredWord);
+            } else if (CONSONANTS.contains(firstLetter)) {
+                loweredWord = transformConsonantWord(loweredWord);
+            }
         }
 
         String transformedWord = insertPunctuations(loweredWord, punctuations);
